@@ -1,101 +1,162 @@
-[![LENIS](https://assets.studiofreight.com/lenis/header.png)](https://github.com/studio-freight/lenis)
+[![LENIS](https://assets.darkroom.engineering/lenis/header.png)](https://github.com/darkroomengineering/lenis)
 
-[![npm version](https://img.shields.io/badge/dynamic/json?color=blue&label=npm&prefix=v&query=version&suffix=%20&url=https%3A%2F%2Fraw.githubusercontent.com%2Fstudio-freight%2Flenis%2Fmain%2Fpackage.json)](https://www.npmjs.com/package/@studio-freight/lenis)
+[![npm](https://img.shields.io/npm/v/lenis?colorA=000000&colorB=ff98a2
+)](https://www.npmjs.com/package/lenis)
+[![downloads](https://img.shields.io/npm/dm/lenis?colorA=000000&colorB=ff98a2
+)](https://www.npmjs.com/package/lenis)
+[![size](https://img.shields.io/bundlephobia/minzip/lenis?label=size&colorA=000000&colorB=ff98a2)](https://bundlephobia.com/package/lenis)
 
 ## Introduction
 
-This is our take on smooth scroll, lightweight, hard-working, smooth as butter scroll. See [Demo](https://lenis.studiofreight.com/).
+Lenis ("smooth" in latin) is a lightweight, robust, and performant smooth scroll library. It's designed by [@darkroom.engineering](https://twitter.com/darkroomdevs) to be simple to use and easy to integrate into your projects. It's built with performance in mind and is optimized for modern browsers. It's perfect for creating smooth scrolling experiences on your website such as webgl scroll synching, parallax effects and much more, see [ Demo](https://lenis.darkroom.engineering/) and [Showcase](#lenis-in-use).
+
+Read our [Manifesto](https://github.com/darkroomengineering/lenis/blob/main/MANIFESTO.md) to learn more about the inspiration behind Lenis.
+
+<br/>
+
+## Sponsors
+
+If you like Lenis, please consider [becoming a sponsor](https://github.com/sponsors/darkroomengineering). Your support helps us to smooth the web one library at a time.
+
+#### They make it possible:
+[![Scott Sunarto](https://avatars.githubusercontent.com/u/4402697?s=80&v=4)](https://smsunarto.com/) [![cachet.studio](https://avatars.githubusercontent.com/u/75880965?s=80&v=4)](https://www.cachet.studio/) [![Mario Sanchez Maselli](https://avatars.githubusercontent.com/u/1336977?s=80&v=4)](https://non-linear.studio/)
 
 <br>
 
-## Features
+## Packages
 
-- Run scroll in the main thread
-- Performant
-- Lightweight [(<4Kb gzipped)](https://bundlephobia.com/package/@studio-freight/lenis@1.0.0-dev.8)
-- Keep CSS Sticky and IntersectionObserver
-- Accessibility (CMD+F page search, keyboard navigation, keep scroll position on page refresh, etc.)
-- External RAF
-- SSR proof
-- Custom scroll easing and duration
+- [lenis](https://github.com/darkroomengineering/lenis/blob/main/README.md)
+- [lenis/react](https://github.com/darkroomengineering/lenis/blob/main/packages/react/README.md)
+- [lenis/snap](https://github.com/darkroomengineering/lenis/tree/main/packages/snap/README.md)
+
 
 <br>
 
-| Feature                     | [Locomotive-scroll](https://github.com/locomotivemtl/locomotive-scroll) | [GSAP ScrollSmoother](https://greensock.com/scrollsmoother/)                                  | [Lenis](https://github.com/studio-freight/lenis)                            |
-|-----------------------------|-------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
-| Native scrollbar            | ❌                                                                       | ✅                                                                                             | ✅                                                                           |
-| Native "scroll" inputs      | ❌                                                                       | ✅                                                                                             | ❌                                                                           |
-| Normalize scroll experience | ✅                                                                       | ❌                                                                                             | ✅                                                                           |
-| Accessibility               | ❌                                                                       | ❌                                                                                             | ✅                                                                           |
-| CSS Sticky                  | ❌                                                                       | ❌                                                                                             | ✅                                                                           |
-| IntsersectionObserver       | ❌                                                                       | ❌                                                                                             | ✅                                                                           |
-| Open source                 | ✅                                                                       | ❌                                                                                             | ✅                                                                           |
-| Built-in animation system   | ✅                                                                       | ✅                                                                                             | ❌                                                                           |
-| Size (gzip)                 | [12.1KB](https://bundlephobia.com/package/locomotive-scroll@4.1.4)      | [26.08KB](https://bundlejs.com/?q=gsap%2FScrollSmoother&treeshake=%5B%7BScrollSmoother%7D%5D) | [3.6KB](https://bundlephobia.com/package/@studio-freight/lenis@1.0.0-dev.8) |
+## Installation
 
-<br>
-
-## Installing
+### JavaScript
 
 using a package manager:
 
 ```bash
-$ npm i @studio-freight/lenis
+npm i lenis
 ```
 ```js
-import Lenis from '@studio-freight/lenis'
+import Lenis from 'lenis'
 ```
 
 <br/>
 
 using scripts:
 
-```htmt
-<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.0/bundled/lenis.js"></script>
+```html
+<script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script> 
 ```
+
 
 <br>
 
 ## Setup
 
-Basic setup:
+### Basic:
 
 ```js
-const lenis = new Lenis()
+// Initialize Lenis
+const lenis = new Lenis({
+  autoRaf: true,
+});
 
+// Listen for the scroll event and log the event data
 lenis.on('scroll', (e) => {
-  console.log(e)
-})
+  console.log(e);
+});
+```
 
+### Custom raf loop:
+
+```js
+// Initialize Lenis
+const lenis = new Lenis();
+
+// Use requestAnimationFrame to continuously update the scroll
 function raf(time) {
-  lenis.raf(time)
-  requestAnimationFrame(raf)
+  lenis.raf(time);
+  requestAnimationFrame(raf);
 }
 
-requestAnimationFrame(raf)
+requestAnimationFrame(raf);
 ```
+
+#### Recommended CSS:
+
+import stylesheet
+```js
+import 'lenis/dist/lenis.css'
+```
+
+or link the CSS file:
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/lenis@1.1.20/dist/lenis.css">
+```
+
+or add it manually:
+
+[See lenis.css stylesheet](./packages/core/lenis.css)
+
+### GSAP ScrollTrigger:
+```js
+// Initialize a new Lenis instance for smooth scrolling
+const lenis = new Lenis();
+
+// Synchronize Lenis scrolling with GSAP's ScrollTrigger plugin
+lenis.on('scroll', ScrollTrigger.update);
+
+// Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
+// This ensures Lenis's smooth scroll animation updates on each GSAP tick
+gsap.ticker.add((time) => {
+  lenis.raf(time * 1000); // Convert time from seconds to milliseconds
+});
+
+// Disable lag smoothing in GSAP to prevent any delay in scroll animations
+gsap.ticker.lagSmoothing(0);
+
+```
+
+### React:
+[See documentation for lenis/react](https://github.com/darkroomengineering/lenis/blob/main/packages/react/README.md).
+
+
+
 
 <br/>
 
 
 ## Instance settings
 
-| Option               | Type                 | Default                                            | Description                                                                                                                                                         |
-|----------------------|----------------------|----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `wrapper`            | `HTMLElement|Window` | `window`                                           | The element that will be used as the scroll container                                                                                                               |
-| `content`            | `HTMLElement`        | `document.documentElement`                         | The element that contains the content that will be scrolled, usually `wrapper`'s direct child                                                                       |
-| `lerp`               | `number`             | `0.1`                                              | Linear interpolation (lerp) intensity (between 0 and 1)                                                                                                             |
-| `duration`           | `number`             | `1.2`                                              | The duration of scroll animation (in seconds). Useless if lerp defined                                                                                              |
-| `easing`             | `function`           | `(t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))` | The easing function to use for the scroll animation, our default is custom but you can pick one from [Easings.net](https://easings.net/en). Useless if lerp defined |
-| `orientation`        | `string`             | `vertical`                                         | The orientation of the scrolling. Can be `vertical` or `horizontal`                                                                                                 |
-| `gestureOrientation` | `string`             | `vertical`                                         | The orientation of the gestures. Can be `vertical`, `horizontal` or `both`                                                                                          |
-| `smoothWheel`        | `boolean`            | `true`                                             | Whether or not to enable smooth scrolling for mouse wheel events                                                                                                    |
-| `smoothTouch`        | `boolean`            | `false`                                            | Whether or not to enable smooth scrolling for touch events. Note: We have disabled it by default because touch devices' native smoothness is impossible to mimic    |
-| `wheelMultiplier`    | `number`             | `1`                                                | The multiplier to use for mouse wheel events                                                                                                                        |
-| `touchMultiplier`    | `number`             | `2`                                                | The multiplier to use for touch events                                                                                                                              |
-| `normalizeWheel`     | `boolean`            | `true`                                             | Normalize wheel inputs across browsers                                                                                                                              |
-| `infinite`           | `boolean`            | `false`                                            | Enable infinite scrolling!                                                                                                                                          |
-
+| Option                   | Type                        | Default                                            | Description                                                                                                                                                                                                                                                                      |
+|--------------------------|-----------------------------|----------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `wrapper`                | `HTMLElement, Window`       | `window`                                           | The element that will be used as the scroll container                                                                                                                                                                                                                            |
+| `content`                | `HTMLElement`               | `document.documentElement`                         | The element that contains the content that will be scrolled, usually `wrapper`'s direct child                                                                                                                                                                                    |
+| `eventsTarget`           | `HTMLElement, Window`       | `wrapper`                                          | The element that will listen to `wheel` and `touch` events                                                                                                                                                                                                                       |
+| `smoothWheel`            | `boolean`                   | `true`                                             | Smooth the scroll initiated by `wheel` events                                                                                                                                                                                                                                    |
+| `lerp`                   | `number`                    | `0.1`                                              | Linear interpolation (lerp) intensity (between 0 and 1)                                                                                                                                                                                                                          |
+| `duration`               | `number`                    | `1.2`                                              | The duration of scroll animation (in seconds). Useless if lerp defined                                                                                                                                                                                                           |
+| `easing`                 | `function`                  | `(t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))` | The easing function to use for the scroll animation, our default is custom but you can pick one from [Easings.net](https://easings.net/en). Useless if lerp defined                                                                                                              |
+| `orientation`            | `string`                    | `vertical`                                         | The orientation of the scrolling. Can be `vertical` or `horizontal`                                                                                                                                                                                                              |
+| `gestureOrientation`     | `string`                    | `vertical`                                         | The orientation of the gestures. Can be `vertical`, `horizontal` or `both`                                                                                                                                                                                                       |
+| `syncTouch`              | `boolean`                   | `false`                                            | Mimic touch device scroll while allowing scroll sync (can be unstable on iOS<16)                                                                                                                                                                                                 |
+| `syncTouchLerp`          | `number`                    | `0.075`                                            | Lerp applied during `syncTouch` inertia                                                                                                                                                                                                                                          |
+| `touchInertiaMultiplier` | `number`                    | `35`                                               | Manage the strength of syncTouch inertia                                                                                                                                                                                                                                         |
+| `wheelMultiplier`        | `number`                    | `1`                                                | The multiplier to use for mouse wheel events                                                                                                                                                                                                                                     |
+| `touchMultiplier`        | `number`                    | `1`                                                | The multiplier to use for touch events                                                                                                                                                                                                                                           |
+| `infinite`               | `boolean`                   | `false`                                            | Enable infinite scrolling! `syncTouch: true` is required on touch devices. ([See example](https://codepen.io/ClementRoche/pen/OJqBLod))                                                                                                                                          |
+| `autoResize`             | `boolean`                   | `true`                                             | Resize instance automatically       based on `ResizeObserver`. If `false` you must resize manually using `.resize()`                                                                                                                                                             |
+| `prevent`                | `function`                  | `undefined`                                        | Manually prevent scroll to be smoothed based on elements traversed by events. If `true` is returned, it will prevent the scroll to be smoothed. Example: `(node) =>  node.classList.contains('cookie-modal')`                                                                    |
+| `virtualScroll`          | `function`                  | `undefined`                                        | Manually modify the events before they get consumed. If `false` is returned, the scroll will not be smoothed. Examples: `(e) => { e.deltaY /= 2 }` (to slow down vertical scroll) or `({ event }) => !event.shiftKey` (to prevent scroll to be smoothed if shift key is pressed) |
+| `overscroll`             | `boolean`                   | `true`                                             | Wether or not to enable overscroll on a nested Lenis instance, similar to CSS overscroll-behavior (https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior)                                                                                                         |
+| `autoRaf`                | `boolean`                   | `false`                                            | Wether or not to automatically run `requestAnimationFrame` loop                                                                                                                                                                                                                  |
+| `anchors`                | `boolean | ScrollToOptions` | `false`                                            | Wether or not to enable anchor links. If `true` is passed, it will enable anchor links with default options. If `ScrollToOptions` is passed, it will enable anchor links with the given options.                                                                                 |
 <br/>
 
 <!-- `target`: goal to reach
@@ -114,74 +175,113 @@ requestAnimationFrame(raf)
 - `lock`(`boolean`): whether or not to prevent user from scrolling until target reached
 - `onComplete`(`function`): called when target is reached -->
 
+## Instance Props
+
+| Property                | Type              | Description                                                                |
+|-------------------------|-------------------|----------------------------------------------------------------------------|
+| `animatedScroll`        | `number`          | Current scroll value                                                       |
+| `dimensions`            | `object`          | Dimensions instance                                                        |
+| `direction`             | `number`          | `1`: scrolling up, `-1`: scrolling down                                    |
+| `emitter`               | `object`          | Emitter instance                                                           |
+| `options`               | `object`          | Instance options                                                           |
+| `targetScroll`          | `number`          | Target scroll value                                                        |
+| `time`                  | `number`          | Time elapsed since instance creation                                       |
+| `actualScroll`          | `number`          | Current scroll value registered by the browser                             |
+| `lastVelocity`          | `number`          | last scroll velocity                                                       |
+| `velocity`              | `number`          | Current scroll velocity                                                    |
+| `isHorizontal` (getter) | `boolean`         | Whether or not the instance is horizontal                                  |
+| `isScrolling` (getter)  | `boolean, string` | Whether or not the scroll is being animated, `smooth`, `native` or `false` |
+| `isStopped` (getter)    | `boolean`         | Whether or not the user should be able to scroll                           |
+| `limit` (getter)        | `number`          | Maximum scroll value                                                       |
+| `progress` (getter)     | `number`          | Scroll progress from `0` to `1`                                            |
+| `rootElement` (getter)  | `HTMLElement`     | Element on which Lenis is instanced                                        |
+| `scroll` (getter)       | `number`          | Current scroll value (handles infinite scroll if activated)                |
+| `className` (getter)    | `string`          | `rootElement` className                                                    |
+
+<br/>
+
 ## Instance Methods
 
-| Method                      | Description                                                                     | Arguments                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-|-----------------------------|---------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `raf(time)`                 | Must be called every frame for internal usage.                                  | `time`: in ms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `scrollTo(target, options)` | Scroll to target.                                                               | `target`: goal to reach<ul><li>`number`: value to scroll in pixels</li><li>`string`: CSS selector or keyword (`top`, `left`, `start`, `bottom`, `right`, `end`)</li><li>`HTMLElement`: DOM element</li></ul>`options`<ul><li>`offset`(`number`): equivalent to [`scroll-padding-top`](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-top)</li><li>`lerp`(`number`): animation lerp intensity</li><li>`duration`(`number`): animation duration (in seconds)</li><li>`easing`(`function`): animation easing</li><li>`immediate`(`boolean`): ignore duration, easing and lerp</li><li>`lock`(`boolean`): whether or not to prevent the user from scrolling until the target is reached</li><li>`force`(`boolean`): reach target even if instance is stopped</li><li>`onComplete`(`function`): called when the target is reached</li></ul> |
-| `on(id, function)`          | `id` can be any of the following [instance events](#instance-events) to listen. |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `stop()`                    | Pauses the scroll                                                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `start()`                   | Resumes the scroll                                                              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `destroy()`                 | Destroys the instance and removes all events.                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Method                      | Description                                                                     | Arguments                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+|-----------------------------|---------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `raf(time)`                 | Must be called every frame for internal usage.                                  | `time`: in ms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `scrollTo(target, options)` | Scroll to target.                                                               | `target`: goal to reach<ul><li>`number`: value to scroll in pixels</li><li>`string`: CSS selector or keyword (`top`, `left`, `start`, `bottom`, `right`, `end`)</li><li>`HTMLElement`: DOM element</li></ul>`options`<ul><li>`offset`(`number`): equivalent to [`scroll-padding-top`](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-top)</li><li>`lerp`(`number`): animation lerp intensity</li><li>`duration`(`number`): animation duration (in seconds)</li><li>`easing`(`function`): animation easing</li><li>`immediate`(`boolean`): ignore duration, easing and lerp</li><li>`lock`(`boolean`): whether or not to prevent the user from scrolling until the target is reached</li><li>`force`(`boolean`): reach target even if instance is stopped</li><li>`onComplete`(`function`): called when the target is reached</li><li>`userData`(`object`): this object will be forwarded through `scroll` events</li></ul> |
+| `on(id, function)`          | `id` can be any of the following [instance events](#instance-events) to listen. |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `stop()`                    | Pauses the scroll                                                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `start()`                   | Resumes the scroll                                                              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `resize()`                  | Compute internal sizes, it has to be used if `autoResize` option is `false`.    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `destroy()`                 | Destroys the instance and removes all events.                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+
+
 
 ## Instance Events
 
-| Event    | Callback Arguments |
-|----------|--------------------|
-| `scroll` | Lenis instance     |
+| Event            | Callback Arguments        |
+|------------------|---------------------------|
+| `scroll`         | Lenis instance            |
+| `virtual-scroll` | `{deltaX, deltaY, event}` |
+
 
 <br/>
 
 ## Considerations
 
-#### Make sure `scroll-behavior` is set to `auto` or not set at all
+### Nested scroll
 
-```css
-.lenis.lenis-smooth {
-  scroll-behavior: auto;
-}
-```
-
-#### Keep HTML elements default sized, this is necessary for Webflow implementation ([see issue](https://github.com/studio-freight/lenis/issues/10))
-
-```css
-html.lenis {
-  height: auto;
-}
-```
-
-#### Use the `data-lenis-prevent` attribute on nested scroll elements. In addition, we advise you to add `overscroll-behavior: contain` on this element
+#### Using Javascript
 
 ```html
-<div data-lenis-prevent>scroll content</div>
+<div id="modal">scrollable content</div>
 ```
 
-```css
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-```
-
-#### Manually use `lenis.scrollTo('#anchor')` on anchor link click ([see issue](https://github.com/studio-freight/lenis/issues/19))
-
-```html
-<a href="#anchor" onclick="lenis.scrollTo('#anchor')">scroll to anchor</a>
-```
-
-#### Hide overflow when lenis is stopped
-```css
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-```
-
-#### GSAP ScrollTrigger integration
 ```js
-lenis.on('scroll', ScrollTrigger.update)
+const lenis = new Lenis({
+  prevent: (node) => node.id === 'modal',
+})
+```
 
-gsap.ticker.add((time)=>{
-  lenis.raf(time * 1000)
+[See example](https://codepen.io/ClementRoche/pen/emONGYN)
+
+#### Using HTML
+
+```html
+<div data-lenis-prevent>scrollable content</div>
+```
+
+[See example](https://codepen.io/ClementRoche/pen/PoLdjpw)
+
+prevent wheel events only
+
+```html
+<div data-lenis-prevent-wheel>scrollable content</div>
+```
+
+prevent touch events only
+
+```html
+<div data-lenis-prevent-touch>scrollable content</div>
+```
+
+
+
+### Anchor links
+By default Lenis will prevent anchor links click while scrolling, to fix that you must set `anchors: true`.
+
+```js
+new Lenis({
+  anchors: true
+})
+```
+
+You can also use `scrollTo` options.
+```js
+new Lenis({
+  anchors: {
+    offset: 100,
+    onComplete: ()=>{
+      console.log('scrolled to anchor')
+    }
+  }
 })
 ```
 
@@ -189,10 +289,12 @@ gsap.ticker.add((time)=>{
 
 ## Limitations
 
-- no support for CSS scroll-snap
-- capped to 60fps on Safari ([source](https://bugs.webkit.org/show_bug.cgi?id=173434))
+- no support for CSS scroll-snap, you must use ([lenis/snap](https://github.com/darkroomengineering/lenis/tree/main/packages/snap/README.md))
+- capped to 60fps on Safari ([source](https://bugs.webkit.org/show_bug.cgi?id=173434)) and 30fps on low power mode
 - smooth scroll will stop working over iframe since they don't forward wheel events
-- position fixed seems to lag on MacOS Safari pre-M1 ([source](https://github.com/studio-freight/lenis/issues/103))
+- position fixed seems to lag on MacOS Safari pre-M1 ([source](https://github.com/darkroomengineering/lenis/issues/103))
+- touch events may behave unexpectedly when `syncTouch` is enabled on iOS < 16
+- nested scroll containers require proper configuration to work correctly
 
 <br>
 
@@ -205,47 +307,23 @@ gsap.ticker.add((time)=>{
 
 <br>
 
-
-
 ## Plugins
 
-- [Loconative-scroll](https://github.com/quentinhocde/loconative-scroll#how-to-switch-from-locomotive-scroll-to-loconative-scroll) by [Quentin Hocde](https://twitter.com/QuentinHocde)
-- [react-lenis](https://github.com/studio-freight/react-lenis) by [Studio Freight](https://www.studiofreight.com/)
 - [r3f-scroll-rig](https://github.com/14islands/r3f-scroll-rig) by [14islands](https://14islands.com/)
+- [locomotive-scroll](https://github.com/locomotivemtl/locomotive-scroll) by [Locomotive](https://locomotive.ca/)
 
 <br>
 
 ## Lenis in use
 
-- [Wyre](https://www.sendwyre.com/) by [Studio Freight](https://www.studiofreight.com/)
-- [Lunchbox](https://lunchbox.io/) by [Studio Freight](https://www.studiofreight.com/)
-- [Easol](https://easol.com/) by [Studio Freight](https://www.studiofreight.com/)
-- [Repeat](https://getrepeat.io/) by [Studio Freight](https://www.studiofreight.com/)
-- [Dragonfly](https://dragonfly.xyz/) by [Studio Freight](https://www.studiofreight.com/)
-- [Yuga Labs](https://yuga.com/) by [Antinomy Studio](https://antinomy.studio/)
-- [Quentin Hocde's Portfolio](https://quentinhocde.com) by [Quentin Hocde](https://twitter.com/QuentinHocde)
-- [Houses Of](https://housesof.world) by [Félix P.](https://flayks.com/) & [Shelby Kay](https://shelbykay.dev/)
-- [Shelby Kay's Portfolio](https://shelbykay.dev) by [Shelby Kay](https://shelbykay.dev/)
-- [Heights Agency Portfolio](https://www.heights.agency/) by [Francesco Michelini](https://www.francescomichelini.com/)
-- [Goodship](https://goodship.io) by [Studio Freight](https://www.studiofreight.com/)
-- [Flayks' Portfolio](https://flayks.com) by [Félix P.](https://flayks.com/) & [Shelby Kay](https://shelbykay.dev/)
-- [Matt Rothenberg's portfolio](https://mattrothenberg.com) by [Matt Rothenberg](https://twitter.com/mattrothenberg)
-- [Edoardo Lunardi's portfolio](https://www.edoardolunardi.dev/) by [Edoardo Lunardi](https://www.edoardolunardi.dev/)
 - [DeSo](https://deso.com) by [Studio Freight](https://www.studiofreight.com/)
-
-<br/>
-
-## Authors
-
-This set of hooks is curated and maintained by the Studio Freight Darkroom team:
-
-- Clément Roche ([@clementroche\_](https://twitter.com/clementroche_)) – [Studio Freight](https://studiofreight.com)
-- Guido Fier ([@uido15](https://twitter.com/uido15)) – [Studio Freight](https://studiofreight.com)
-- Leandro Soengas ([@lsoengas](https://twitter.com/lsoengas)) - [Studio Freight](https://studiofreight.com)
-- Franco Arza ([@arzafran](https://twitter.com/arzafran)) - [Studio Freight](https://studiofreight.com)
+- [Sculpting Harmony](https://gehry.getty.edu/) by [Resn](https://resn.co.nz/)
+- [Superpower](https://superpower.com/)
+- [Daylight Computer](https://daylightcomputer.com/) by [Basement Studio](https://basement.studio/)
+- [Lifeworld by Olafur Eliasson](https://lifeworld.wetransfer.com/) by Nicolas Garnier, Simon Riisnæs Dagfinrud, Lumír Španihel, Everton Guilherme, Diana Alcausin, Cristiana Sousa
 
 <br/>
 
 ## License
 
-[The MIT License.](https://opensource.org/licenses/MIT)
+MIT © [darkroom.engineering](https://github.com/darkroomengineering)
