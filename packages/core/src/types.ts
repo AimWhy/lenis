@@ -29,7 +29,7 @@ export type FromToOptions = {
   onUpdate?: OnUpdateCallback
 }
 
-export type UserData = Record<string, any>
+export type UserData = Record<string, unknown>
 
 export type Scrolling = boolean | 'native' | 'smooth'
 

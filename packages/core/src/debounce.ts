@@ -1,4 +1,4 @@
-export function debounce<CB extends (...args: any[]) => void>(
+export function debounce<CB extends (...args: unknown[]) => void>(
   callback: CB,
   delay: number
 ) {

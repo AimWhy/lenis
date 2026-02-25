@@ -6,7 +6,7 @@ useLenis((lenis) => {
   console.log('innerchild scroll', lenis.options.lerp, lenis.scroll)
 })
 
-const lorem = new LoremIpsum().generateParagraphs(100)
+const _lorem = new LoremIpsum().generateParagraphs(100)
 </script>
 
 <template>

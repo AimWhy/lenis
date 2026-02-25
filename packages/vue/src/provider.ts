@@ -23,10 +23,11 @@ import { globalAddCallback, globalLenis, globalRemoveCallback } from './store'
 export const LenisSymbol: InjectionKey<ShallowRef<Lenis | undefined>> =
   Symbol('LenisContext')
 export const AddCallbackSymbol: InjectionKey<
-  (callback: any, priority: number) => void
+  ((callback: ScrollCallback, priority: number) => void) | undefined
 > = Symbol('AddCallback')
-export const RemoveCallbackSymbol: InjectionKey<(callback: any) => void> =
-  Symbol('RemoveCallback')
+export const RemoveCallbackSymbol: InjectionKey<
+  ((callback: ScrollCallback) => void) | undefined
+> = Symbol('RemoveCallback')
 
 export type LenisExposed = {
   wrapper?: HTMLDivElement
@@ -112,8 +113,8 @@ const VueLenisImpl = defineComponent({
     }
 
     const onScroll: ScrollCallback = (data) => {
-      for (let i = 0; i < callbacks.length; i++) {
-        callbacks[i]?.callback(data)
+      for (const { callback } of callbacks) {
+        callback(data)
       }
     }
 
@@ -162,8 +163,8 @@ export const vueLenisPlugin: Plugin = (app) => {
   app.component('vue-lenis', VueLenis)
   // Setup a global provide to silence top level useLenis injection warning
   app.provide(LenisSymbol, shallowRef(undefined))
-  app.provide(AddCallbackSymbol, undefined as any)
-  app.provide(RemoveCallbackSymbol, undefined as any)
+  app.provide(AddCallbackSymbol, undefined)
+  app.provide(RemoveCallbackSymbol, undefined)
 }
 
 // @ts-expect-error

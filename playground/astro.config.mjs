@@ -1,8 +1,7 @@
-import { defineConfig } from 'astro/config'
-import path from 'path'
-
+import path from 'node:path'
 import react from '@astrojs/react'
 import vue from '@astrojs/vue'
+import { defineConfig } from 'astro/config'
 
 const root = path.resolve('..')
 

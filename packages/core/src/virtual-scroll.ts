@@ -4,6 +4,12 @@ import type { VirtualScrollCallback } from './types'
 const LINE_HEIGHT = 100 / 6
 const listenerOptions: AddEventListenerOptions = { passive: false }
 
+function getDeltaMultiplier(deltaMode: number, size: number): number {
+  if (deltaMode === 1) return LINE_HEIGHT
+  if (deltaMode === 2) return size
+  return 1
+}
+
 export class VirtualScroll {
   touchStart = {
     x: 0,
@@ -47,7 +53,7 @@ export class VirtualScroll {
    * @param callback Callback function
    */
   on(event: string, callback: VirtualScrollCallback) {
-    return this.emitter.on(event, callback)
+    return this.emitter.on(event, callback as (...args: unknown[]) => void)
   }
 
   /** Remove all event listeners and clean up */
@@ -137,10 +143,8 @@ export class VirtualScroll {
   onWheel = (event: WheelEvent) => {
     let { deltaX, deltaY, deltaMode } = event
 
-    const multiplierX =
-      deltaMode === 1 ? LINE_HEIGHT : deltaMode === 2 ? this.window.width : 1
-    const multiplierY =
-      deltaMode === 1 ? LINE_HEIGHT : deltaMode === 2 ? this.window.height : 1
+    const multiplierX = getDeltaMultiplier(deltaMode, this.window.width)
+    const multiplierY = getDeltaMultiplier(deltaMode, this.window.height)
 
     deltaX *= multiplierX
     deltaY *= multiplierY

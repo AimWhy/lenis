@@ -1,11 +1,11 @@
-import { ReactLenis, useLenis, type LenisRef } from 'lenis/react'
+import { type LenisRef, ReactLenis, useLenis } from 'lenis/react'
 import { LoremIpsum } from 'lorem-ipsum'
 import { useEffect, useRef, useState } from 'react'
 
 function App() {
   const [lorem] = useState(() => new LoremIpsum().generateParagraphs(200))
 
-  const lenis = useLenis((lenis) => {
+  const _lenis = useLenis((lenis) => {
     console.log('lenis in callback', lenis)
   })
 
@@ -13,7 +13,7 @@ function App() {
 
   useEffect(() => {
     console.log('lenis ref', lenisRef.current)
-  }, [lenisRef])
+  }, [])
 
   // useEffect(() => {
   //   console.log('lenis ref', lenisRef.current)

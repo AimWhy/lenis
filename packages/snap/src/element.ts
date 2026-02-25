@@ -158,7 +158,8 @@ export class SnapElement {
   }
 
   onWrapperResize = () => {
-    let top, left
+    let top: number | undefined
+    let left: number | undefined
 
     if (this.options.ignoreSticky) removeParentSticky(this.element)
     if (this.options.ignoreTransform) {

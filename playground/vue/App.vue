@@ -2,13 +2,11 @@
 import { useLenis } from 'lenis/vue'
 import { LoremIpsum } from 'lorem-ipsum'
 import { ref, watch } from 'vue'
-import Child from './Child.vue'
-import InnerChild from './InnerChild.vue'
 
-const lorem = new LoremIpsum().generateParagraphs(200)
+const _lorem = new LoremIpsum().generateParagraphs(200)
 
-const lerp = ref(0.1)
-const autoRaf = ref(true)
+const _lerp = ref(0.1)
+const _autoRaf = ref(true)
 
 const lenis = useLenis(
   (lenis) => {

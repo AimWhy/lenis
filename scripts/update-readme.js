@@ -1,5 +1,5 @@
-import fs from 'fs'
-import packageJson from '../package.json' assert { type: 'json' }
+import fs from 'node:fs'
+import packageJson from '../package.json' with { type: 'json' }
 
 const readmePath = './README.md'
 
@@ -13,7 +13,7 @@ function updateVersion() {
       }
 
       const updatedReadme = data.replace(
-        /\/lenis@([^\/]+)\//g,
+        /\/lenis@([^/]+)\//g,
         `/lenis@${packageJson.version}/`
       )
 

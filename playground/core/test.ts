@@ -12,14 +12,14 @@ document
   .querySelector('#app')!
   .insertAdjacentText(
     'beforeend',
-    new LoremIpsum().generateParagraphs(40) + 'test123'
+    `${new LoremIpsum().generateParagraphs(40)}test123`
   )
 
 // document.querySelector('main')?.addEventListener('scrollend', () => {
 //   console.log('scrollend')
 // })
 
-window.addEventListener('scroll', (e) => {
+window.addEventListener('scroll', (_e) => {
   // console.log('window scroll', e)
 })
 
@@ -27,7 +27,7 @@ window.addEventListener('scrollend', (e) => {
   console.log('window scrollend', e)
 })
 
-document.querySelector('#nested')?.addEventListener('scrollend', (e) => {
+document.querySelector('#nested')?.addEventListener('scrollend', (_e) => {
   // console.log('nested scrollend', e)
 })
 
@@ -88,7 +88,7 @@ const lenis = new Lenis({
   // },
 })
 
-const nestedLenis = new Lenis({
+const _nestedLenis = new Lenis({
   wrapper: document.querySelector('#nested')!,
   content: document.querySelector('#nested-content')!,
   autoRaf: true,
@@ -98,7 +98,7 @@ const nestedLenis = new Lenis({
   // infinite: true,
 })
 
-lenis.on('scroll', (e) => {
+lenis.on('scroll', (_e) => {
   // console.log('scroll', e)
 })
 
@@ -129,7 +129,7 @@ lenis.on('scroll', (e) => {
 // window.nestedLenis = nestedLenis
 
 // console.log(lenis.dimensions.height)
-lenis.on('scroll', (e) => {
+lenis.on('scroll', (_e) => {
   // console.log(e.isScrolling)
   // console.log(e.scroll, e.velocity)
   // console.log(e.scroll, e.velocity, e.isScrolling, e.userData)

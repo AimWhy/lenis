@@ -1,6 +1,7 @@
 // import { LoremIpsum } from 'lorem-ipsum'
 import Lenis from 'lenis'
 import Snap from 'lenis/snap'
+
 // import Snap from '../src/index.ts'
 
 // document.querySelector('#app').innerHTML = new LoremIpsum().generateParagraphs(
@@ -15,7 +16,7 @@ const lenis = new Lenis({
 })
 window.lenis = lenis
 
-const i = 0
+const _i = 0
 
 const snap = new Snap(lenis, {
   type: 'lock', // 'mandatory', 'proximity', 'lock'
@@ -40,12 +41,12 @@ declare global {
 
 window.snap = snap
 
-const section1 = document.querySelector<HTMLDivElement>('.section-1')!
+const _section1 = document.querySelector<HTMLDivElement>('.section-1')!
 const section2 = document.querySelector<HTMLDivElement>('.section-2')!
 const section3 = document.querySelector<HTMLDivElement>('.section-3')!
 const section4 = document.querySelector<HTMLDivElement>('.section-4')!
 const section5 = document.querySelector<HTMLDivElement>('.section-5')!
-const section6 = document.querySelector<HTMLDivElement>('.section-6')!
+const _section6 = document.querySelector<HTMLDivElement>('.section-6')!
 
 // snap.add(0, {
 //   index: 0,
@@ -59,7 +60,7 @@ const section6 = document.querySelector<HTMLDivElement>('.section-6')!
 //   align: ['start', 'end'],
 // })
 
-const unsub1 = snap.addElement(section2, {
+const _unsub1 = snap.addElement(section2, {
   align: 'center',
 })
 
@@ -78,7 +79,7 @@ snap.addElement(section3, {
 //   align: ['center'],
 // })
 
-const unsubs = snap.addElements([section4, section5], {
+const _unsubs = snap.addElements([section4, section5], {
   align: ['center'],
 })
 

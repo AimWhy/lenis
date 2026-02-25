@@ -74,7 +74,10 @@ export class Snap {
     this.onWindowResize()
     window.addEventListener('resize', this.onWindowResize, false)
 
-    this.onSnapDebounced = debounce(this.onSnap, this.options.debounce)
+    this.onSnapDebounced = debounce(
+      this.onSnap as (...args: unknown[]) => void,
+      this.options.debounce
+    )
 
     this.lenis.on('virtual-scroll', this.onSnapDebounced)
   }
@@ -270,7 +273,7 @@ export class Snap {
 
     if (snaps.length === 0) return
 
-    let snapIndex
+    let snapIndex: number | undefined
 
     const prevSnapIndex = snaps.findLastIndex(({ value }) => value < scroll)
     const nextSnapIndex = snaps.findIndex(({ value }) => value > scroll)
@@ -310,6 +313,8 @@ export class Snap {
   }
 
   resize() {
-    this.elements.forEach((element) => element.onWrapperResize())
+    this.elements.forEach((element) => {
+      element.onWrapperResize()
+    })
   }
 }

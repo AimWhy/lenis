@@ -7,7 +7,7 @@ import {
 } from '@nuxt/kit'
 
 // Module options TypeScript interface definition
-export interface ModuleOptions {}
+export type ModuleOptions = Record<string, never>
 
 const nuxtModule = defineNuxtModule<ModuleOptions>({
   meta: {

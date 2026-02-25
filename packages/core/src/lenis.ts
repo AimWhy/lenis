@@ -263,8 +263,8 @@ export class Lenis {
    */
   on(event: 'scroll', callback: ScrollCallback): () => void
   on(event: 'virtual-scroll', callback: VirtualScrollCallback): () => void
-  on(event: LenisEvent, callback: any) {
-    return this.emitter.on(event, callback)
+  on(event: LenisEvent, callback: ScrollCallback | VirtualScrollCallback) {
+    return this.emitter.on(event, callback as (...args: unknown[]) => void)
   }
 
   /**
@@ -275,8 +275,8 @@ export class Lenis {
    */
   off(event: 'scroll', callback: ScrollCallback): void
   off(event: 'virtual-scroll', callback: VirtualScrollCallback): void
-  off(event: LenisEvent, callback: any) {
-    return this.emitter.off(event, callback)
+  off(event: LenisEvent, callback: ScrollCallback | VirtualScrollCallback) {
+    return this.emitter.off(event, callback as (...args: unknown[]) => void)
   }
 
   private onScrollEnd = (e: Event | CustomEvent) => {
@@ -664,7 +664,7 @@ export class Lenis {
    * })
    */
   scrollTo(
-    target: number | string | HTMLElement,
+    _target: number | string | HTMLElement,
     {
       offset = 0,
       immediate = false,
@@ -681,6 +681,9 @@ export class Lenis {
   ) {
     if ((this.isStopped || this.isLocked) && !force) return
 
+    let target: number | string | HTMLElement = _target
+    let adjustedOffset = offset
+
     // keywords
     if (
       typeof target === 'string' &&
@@ -693,7 +696,7 @@ export class Lenis {
     ) {
       target = this.limit
     } else {
-      let node
+      let node: Element | null = null
 
       if (typeof target === 'string') {
         // CSS selector
@@ -715,7 +718,9 @@ export class Lenis {
         if (this.options.wrapper !== window) {
           // nested scroll offset correction
           const wrapperRect = this.rootElement.getBoundingClientRect()
-          offset -= this.isHorizontal ? wrapperRect.left : wrapperRect.top
+          adjustedOffset -= this.isHorizontal
+            ? wrapperRect.left
+            : wrapperRect.top
         }
 
         const rect = node.getBoundingClientRect()
@@ -727,7 +732,7 @@ export class Lenis {
 
     if (typeof target !== 'number') return
 
-    target += offset
+    target += adjustedOffset
     target = Math.round(target)
 
     if (this.options.infinite) {
@@ -737,9 +742,9 @@ export class Lenis {
         const distance = target - this.animatedScroll
 
         if (distance > this.limit / 2) {
-          target = target - this.limit
+          target -= this.limit
         } else if (distance < -this.limit / 2) {
-          target = target + this.limit
+          target += this.limit
         }
       }
     } else {
@@ -839,17 +844,19 @@ export class Lenis {
   ) {
     const time = Date.now()
 
+    // @ts-expect-error - _lenis is a custom cache property
+    if (!node._lenis) node._lenis = {}
     // @ts-expect-error
-    const cache = (node._lenis ??= {})
+    const cache = node._lenis
 
-    let hasOverflowX,
-      hasOverflowY,
-      isScrollableX,
-      isScrollableY,
-      scrollWidth,
-      scrollHeight,
-      clientWidth,
-      clientHeight
+    let hasOverflowX: boolean | undefined
+    let hasOverflowY: boolean | undefined
+    let isScrollableX: boolean | undefined
+    let isScrollableY: boolean | undefined
+    let scrollWidth: number
+    let scrollHeight: number
+    let clientWidth: number
+    let clientHeight: number
 
     const gestureOrientation = this.options.gestureOrientation
 
@@ -928,7 +935,11 @@ export class Lenis {
 
     if (!orientation) return false
 
-    let scroll, maxScroll, delta, hasOverflow, isScrollable
+    let scroll: number | undefined
+    let maxScroll: number | undefined
+    let delta: number | undefined
+    let hasOverflow: boolean | undefined
+    let isScrollable: boolean | undefined
 
     if (orientation === 'x') {
       scroll = node.scrollLeft

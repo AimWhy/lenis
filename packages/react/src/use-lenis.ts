@@ -49,7 +49,7 @@ const fallbackContext: Partial<LenisContextValue> = {}
  */
 export function useLenis(
   callback?: ScrollCallback,
-  deps: any[] = [],
+  deps: unknown[] = [],
   priority = 0
 ) {
   // Try to get the lenis instance from the context first
@@ -70,7 +70,7 @@ export function useLenis(
     return () => {
       removeCallback(callback)
     }
-  }, [lenis, addCallback, removeCallback, priority, ...deps])
+  }, [lenis, addCallback, removeCallback, priority, ...deps, callback])
 
   return lenis
 }

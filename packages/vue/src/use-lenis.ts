@@ -45,7 +45,7 @@ export function useLenis(callback?: ScrollCallback, priority = 0) {
       if (!(lenis && addCallback && removeCallback && callback)) return
 
       addCallback?.(callback, priority)
-      callback?.(lenis as any)
+      callback?.(lenis!)
 
       onWatcherCleanup(() => {
         removeCallback?.(callback)

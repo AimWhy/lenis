@@ -69,7 +69,7 @@ export const ReactLenis = forwardRef<LenisRef, LenisProps>(
         lenis.destroy()
         setLenis(undefined)
       }
-    }, [root, JSON.stringify({ ...options, wrapper: null, content: null })])
+    }, [autoRaf, options])
 
     // Handle callbacks
     const callbacksRefs = useRef<
@@ -110,8 +110,8 @@ export const ReactLenis = forwardRef<LenisRef, LenisProps>(
       if (!lenis) return
 
       const onScroll: ScrollCallback = (data) => {
-        for (let i = 0; i < callbacksRefs.current.length; i++) {
-          callbacksRefs.current[i]?.callback(data)
+        for (const { callback } of callbacksRefs.current) {
+          callback(data)
         }
       }
 
