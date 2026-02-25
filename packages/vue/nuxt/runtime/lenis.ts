@@ -1,7 +1,7 @@
+// @ts-expect-error - lenis/vue is a valid module
+import vuePlugin from 'lenis/vue'
 import type { Plugin } from '#app'
 import { defineNuxtPlugin } from '#imports'
-// @ts-ignore - lenis/vue is a valid module
-import vuePlugin from 'lenis/vue'
 
 const plugin = defineNuxtPlugin({
   name: 'lenis',

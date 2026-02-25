@@ -29,7 +29,7 @@ export function useLenis(callback?: ScrollCallback, priority = 0) {
     // Wait two ticks to make sure the lenis instance is mounted
     nextTick(() => {
       nextTick(() => {
-        // @ts-ignore - import.meta.env is available in vite and nuxt
+        // @ts-expect-error - import.meta.env is available in vite and nuxt
         if (!lenis.value && import.meta.env.DEV) {
           console.warn(
             'No lenis instance found, either mount a root lenis instance or wrap your component in a lenis provider'
@@ -42,7 +42,7 @@ export function useLenis(callback?: ScrollCallback, priority = 0) {
   watch(
     [lenis, addCallback, removeCallback],
     ([lenis, addCallback, removeCallback]) => {
-      if (!lenis || !addCallback || !removeCallback || !callback) return
+      if (!(lenis && addCallback && removeCallback && callback)) return
 
       addCallback?.(callback, priority)
       callback?.(lenis as any)

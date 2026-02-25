@@ -74,7 +74,7 @@ const VueLenisImpl = defineComponent({
 
         if (!isClient) return
 
-        if (!props.root && (!wrapper.value || !content.value)) return
+        if (!(props.root || (wrapper.value && content.value))) return
 
         lenisRef.value = new Lenis({
           ...props.options,
@@ -146,11 +146,10 @@ const VueLenisImpl = defineComponent({
     return () => {
       if (props.root) {
         return slots.default?.()
-      } else {
-        return h('div', { ref: wrapper, ...props?.props }, [
-          h('div', { ref: content }, slots.default?.()),
-        ])
       }
+      return h('div', { ref: wrapper, ...props?.props }, [
+        h('div', { ref: content }, slots.default?.()),
+      ])
     }
   },
 })
@@ -167,7 +166,7 @@ export const vueLenisPlugin: Plugin = (app) => {
   app.provide(RemoveCallbackSymbol, undefined as any)
 }
 
-// @ts-ignore
+// @ts-expect-error
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     'vue-lenis': typeof VueLenis

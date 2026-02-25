@@ -18,7 +18,7 @@ export function clamp(min: number, input: number, max: number) {
  * @returns Truncated value
  */
 export function truncate(value: number, decimals = 0) {
-  return parseFloat(value.toFixed(decimals))
+  return Number.parseFloat(value.toFixed(decimals))
 }
 
 /**

@@ -228,8 +228,8 @@ export class Snap {
   }
 
   get distanceThreshold() {
-    let distanceThreshold = Infinity
-    if (this.options.type === 'mandatory') return Infinity
+    let distanceThreshold = Number.POSITIVE_INFINITY
+    if (this.options.type === 'mandatory') return Number.POSITIVE_INFINITY
 
     const { isHorizontal } = this.lenis
 
@@ -285,12 +285,12 @@ export class Snap {
       const prevSnap = snaps[prevSnapIndex]!
       const distanceToPrevSnap = prevSnap
         ? Math.abs(scroll - prevSnap.value)
-        : Infinity
+        : Number.POSITIVE_INFINITY
 
       const nextSnap = snaps[nextSnapIndex]!
       const distanceToNextSnap = nextSnap
         ? Math.abs(scroll - nextSnap.value)
-        : Infinity
+        : Number.POSITIVE_INFINITY
       snapIndex =
         distanceToPrevSnap < distanceToNextSnap ? prevSnapIndex : nextSnapIndex
     }

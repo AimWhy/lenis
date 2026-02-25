@@ -897,7 +897,7 @@ export class Lenis {
       clientHeight = cache.clientHeight
     }
 
-    if (!(hasOverflowX || hasOverflowY) || !(isScrollableX || isScrollableY)) {
+    if (!((hasOverflowX || hasOverflowY) && (isScrollableX || isScrollableY))) {
       return false
     }
 

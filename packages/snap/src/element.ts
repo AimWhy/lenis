@@ -80,7 +80,7 @@ export class SnapElement {
   element: HTMLElement
   options: SnapElementOptions
   align: string[]
-  // @ts-ignore
+  // @ts-expect-error
   rect: Rect = {}
   wrapperResizeObserver: ResizeObserver
   resizeObserver: ResizeObserver

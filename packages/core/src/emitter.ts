@@ -19,7 +19,7 @@ export class Emitter {
    * @param args Data to pass to the event handlers
    */
   emit(event: string, ...args: unknown[]) {
-    let callbacks = this.events[event] || []
+    const callbacks = this.events[event] || []
     for (let i = 0, length = callbacks.length; i < length; i++) {
       callbacks[i]?.(...args)
     }
