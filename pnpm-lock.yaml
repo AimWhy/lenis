@@ -18,6 +18,9 @@ importers:
         specifier: '>=3.0.0'
         version: 3.5.27(typescript@5.9.3)
     devDependencies:
+      '@biomejs/biome':
+        specifier: ^2.4.2
+        version: 2.4.2
       terser:
         specifier: ^5.37.0
         version: 5.46.0
@@ -69,7 +72,7 @@ importers:
         version: 4.4.2(@types/react-dom@19.2.3)(@types/react@19.2.11)(react-dom@19.2.4)(react@19.2.4)(terser@5.46.0)
       '@astrojs/vue':
         specifier: ^5.0.6
-        version: 5.1.4(@nuxt/kit@4.3.0)(astro@5.17.1)(terser@5.46.0)(vue@3.5.27)
+        version: 5.1.4(astro@5.17.1)(terser@5.46.0)(vue@3.5.27)
       '@types/react':
         specifier: ^19.0.7
         version: 19.2.11
@@ -111,7 +114,7 @@ importers:
         version: link:../..
       nuxt:
         specifier: ^3.15.3
-        version: 3.21.0(@vue/compiler-sfc@3.5.27)(terser@5.46.0)(typescript@5.9.3)(vite@7.3.1)
+        version: 3.21.0(@biomejs/biome@2.4.2)(@vue/compiler-sfc@3.5.27)(terser@5.46.0)(typescript@5.9.3)(vite@7.3.1)
       vue:
         specifier: latest
         version: 3.5.27(typescript@5.9.3)
@@ -264,7 +267,7 @@ packages:
       - supports-color
     dev: false
 
-  /@astrojs/vue@5.1.4(@nuxt/kit@4.3.0)(astro@5.17.1)(terser@5.46.0)(vue@3.5.27):
+  /@astrojs/vue@5.1.4(astro@5.17.1)(terser@5.46.0)(vue@3.5.27):
     resolution: {integrity: sha512-srE+3tgSnGG4FVr7Bs9JAgLcUAg1mtGrbBFdwlj++Y05Awwlc967WCcmOK6rnxQ6q5PcK5+WL2x2tKoWh5SN7A==}
     engines: {node: 18.20.8 || ^20.3.0 || >=22.0.0}
     peerDependencies:
@@ -276,10 +279,9 @@ packages:
       '@vue/compiler-sfc': 3.5.27
       astro: 5.17.1(terser@5.46.0)(typescript@5.9.3)
       vite: 6.4.1(terser@5.46.0)
-      vite-plugin-vue-devtools: 7.7.9(@nuxt/kit@4.3.0)(vite@6.4.1)(vue@3.5.27)
+      vite-plugin-vue-devtools: 7.7.9(vite@6.4.1)(vue@3.5.27)
       vue: 3.5.27(typescript@5.9.3)
     transitivePeerDependencies:
-      - '@nuxt/kit'
       - '@types/node'
       - jiti
       - less
@@ -617,6 +619,84 @@ packages:
     dependencies:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
+
+  /@biomejs/biome@2.4.2:
+    resolution: {integrity: sha512-vVE/FqLxNLbvYnFDYg3Xfrh1UdFhmPT5i+yPT9GE2nTUgI4rkqo5krw5wK19YHBd7aE7J6r91RRmb8RWwkjy6w==}
+    engines: {node: '>=14.21.3'}
+    hasBin: true
+    optionalDependencies:
+      '@biomejs/cli-darwin-arm64': 2.4.2
+      '@biomejs/cli-darwin-x64': 2.4.2
+      '@biomejs/cli-linux-arm64': 2.4.2
+      '@biomejs/cli-linux-arm64-musl': 2.4.2
+      '@biomejs/cli-linux-x64': 2.4.2
+      '@biomejs/cli-linux-x64-musl': 2.4.2
+      '@biomejs/cli-win32-arm64': 2.4.2
+      '@biomejs/cli-win32-x64': 2.4.2
+
+  /@biomejs/cli-darwin-arm64@2.4.2:
+    resolution: {integrity: sha512-3pEcKCP/1POKyaZZhXcxFl3+d9njmeAihZ17k8lL/1vk+6e0Cbf0yPzKItFiT+5Yh6TQA4uKvnlqe0oVZwRxCA==}
+    engines: {node: '>=14.21.3'}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    optional: true
+
+  /@biomejs/cli-darwin-x64@2.4.2:
+    resolution: {integrity: sha512-P7hK1jLVny+0R9UwyGcECxO6sjETxfPyBm/1dmFjnDOHgdDPjPqozByunrwh4xPKld8sxOr5eAsSqal5uKgeBg==}
+    engines: {node: '>=14.21.3'}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    optional: true
+
+  /@biomejs/cli-linux-arm64-musl@2.4.2:
+    resolution: {integrity: sha512-/x04YK9+7erw6tYEcJv9WXoBHcULI/wMOvNdAyE9S3JStZZ9yJyV67sWAI+90UHuDo/BDhq0d96LDqGlSVv7WA==}
+    engines: {node: '>=14.21.3'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    optional: true
+
+  /@biomejs/cli-linux-arm64@2.4.2:
+    resolution: {integrity: sha512-DI3Mi7GT2zYNgUTDEbSjl3e1KhoP76OjQdm8JpvZYZWtVDRyLd3w8llSr2TWk1z+U3P44kUBWY3X7H9MD1/DGQ==}
+    engines: {node: '>=14.21.3'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    optional: true
+
+  /@biomejs/cli-linux-x64-musl@2.4.2:
+    resolution: {integrity: sha512-wbBmTkeAoAYbOQ33f6sfKG7pcRSydQiF+dTYOBjJsnXO2mWEOQHllKlC2YVnedqZFERp2WZhFUoO7TNRwnwEHQ==}
+    engines: {node: '>=14.21.3'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    optional: true
+
+  /@biomejs/cli-linux-x64@2.4.2:
+    resolution: {integrity: sha512-GK2ErnrKpWFigYP68cXiCHK4RTL4IUWhK92AFS3U28X/nuAL5+hTuy6hyobc8JZRSt+upXt1nXChK+tuHHx4mA==}
+    engines: {node: '>=14.21.3'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    optional: true
+
+  /@biomejs/cli-win32-arm64@2.4.2:
+    resolution: {integrity: sha512-k2uqwLYrNNxnaoiW3RJxoMGnbKda8FuCmtYG3cOtVljs3CzWxaTR+AoXwKGHscC9thax9R4kOrtWqWN0+KdPTw==}
+    engines: {node: '>=14.21.3'}
+    cpu: [arm64]
+    os: [win32]
+    requiresBuild: true
+    optional: true
+
+  /@biomejs/cli-win32-x64@2.4.2:
+    resolution: {integrity: sha512-9ma7C4g8Sq3cBlRJD2yrsHXB1mnnEBdpy7PhvFrylQWQb4PoyCmPucdX7frvsSBQuFtIiKCrolPl/8tCZrKvgQ==}
+    engines: {node: '>=14.21.3'}
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    optional: true
 
   /@bomb.sh/tab@0.0.11(citty@0.1.6):
     resolution: {integrity: sha512-RSqyreeicYBALcMaNxIUJTBknftXsyW45VRq5gKDNwKroh0Re5SDoWwXZaphb+OTEzVdpm/BA8Uq6y0P+AtVYw==}
@@ -1742,7 +1822,7 @@ packages:
       klona: 2.0.6
       mocked-exports: 0.1.1
       nitropack: 2.13.1
-      nuxt: 3.21.0(@vue/compiler-sfc@3.5.27)(terser@5.46.0)(typescript@5.9.3)(vite@7.3.1)
+      nuxt: 3.21.0(@biomejs/biome@2.4.2)(@vue/compiler-sfc@3.5.27)(terser@5.46.0)(typescript@5.9.3)(vite@7.3.1)
       ohash: 2.0.11
       pathe: 2.0.3
       pkg-types: 2.3.0
@@ -1822,7 +1902,7 @@ packages:
       - magicast
     dev: false
 
-  /@nuxt/vite-builder@3.21.0(nuxt@3.21.0)(terser@5.46.0)(typescript@5.9.3)(vue@3.5.27):
+  /@nuxt/vite-builder@3.21.0(@biomejs/biome@2.4.2)(nuxt@3.21.0)(terser@5.46.0)(typescript@5.9.3)(vue@3.5.27):
     resolution: {integrity: sha512-XxwadSMlpvtjDstTtUHdXhLAGldZlWNmPhfAGo5PhsrXhidrjHcODXTGnh9iC1mbVu8xML78/m2rhB9MFHSCyw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     peerDependencies:
@@ -1851,7 +1931,7 @@ packages:
       magic-string: 0.30.21
       mlly: 1.8.0
       mocked-exports: 0.1.1
-      nuxt: 3.21.0(@vue/compiler-sfc@3.5.27)(terser@5.46.0)(typescript@5.9.3)(vite@7.3.1)
+      nuxt: 3.21.0(@biomejs/biome@2.4.2)(@vue/compiler-sfc@3.5.27)(terser@5.46.0)(typescript@5.9.3)(vite@7.3.1)
       ohash: 2.0.11
       pathe: 2.0.3
       perfect-debounce: 2.1.0
@@ -1864,7 +1944,7 @@ packages:
       unenv: 2.0.0-rc.24
       vite: 7.3.1(jiti@2.6.1)(terser@5.46.0)
       vite-node: 5.3.0(jiti@2.6.1)(terser@5.46.0)
-      vite-plugin-checker: 0.12.0(typescript@5.9.3)(vite@7.3.1)
+      vite-plugin-checker: 0.12.0(@biomejs/biome@2.4.2)(typescript@5.9.3)(vite@7.3.1)
       vue: 3.5.27(typescript@5.9.3)
       vue-bundle-renderer: 2.2.0
     transitivePeerDependencies:
@@ -6362,7 +6442,7 @@ packages:
       boolbase: 1.0.0
     dev: false
 
-  /nuxt@3.21.0(@vue/compiler-sfc@3.5.27)(terser@5.46.0)(typescript@5.9.3)(vite@7.3.1):
+  /nuxt@3.21.0(@biomejs/biome@2.4.2)(@vue/compiler-sfc@3.5.27)(terser@5.46.0)(typescript@5.9.3)(vite@7.3.1):
     resolution: {integrity: sha512-K3vX68M0lXbqzvehWb+y6/YqAF+m7MEQQ3mtbcm34ynzB6OpFOJoZV9scBzFd5LehLoYl55CSNpY5vsupyJw7Q==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
@@ -6382,7 +6462,7 @@ packages:
       '@nuxt/nitro-server': 3.21.0(nuxt@3.21.0)(typescript@5.9.3)
       '@nuxt/schema': 3.21.0
       '@nuxt/telemetry': 2.6.6
-      '@nuxt/vite-builder': 3.21.0(nuxt@3.21.0)(terser@5.46.0)(typescript@5.9.3)(vue@3.5.27)
+      '@nuxt/vite-builder': 3.21.0(@biomejs/biome@2.4.2)(nuxt@3.21.0)(terser@5.46.0)(typescript@5.9.3)(vue@3.5.27)
       '@unhead/vue': 2.1.2(vue@3.5.27)
       '@vue/shared': 3.5.27
       c12: 3.3.3(magicast@0.5.1)
@@ -8564,7 +8644,7 @@ packages:
       - yaml
     dev: false
 
-  /vite-plugin-checker@0.12.0(typescript@5.9.3)(vite@7.3.1):
+  /vite-plugin-checker@0.12.0(@biomejs/biome@2.4.2)(typescript@5.9.3)(vite@7.3.1):
     resolution: {integrity: sha512-CmdZdDOGss7kdQwv73UyVgLPv0FVYe5czAgnmRX2oKljgEvSrODGuClaV3PDR2+3ou7N/OKGauDDBjy2MB07Rg==}
     engines: {node: '>=16.11'}
     peerDependencies:
@@ -8602,6 +8682,7 @@ packages:
         optional: true
     dependencies:
       '@babel/code-frame': 7.29.0
+      '@biomejs/biome': 2.4.2
       chokidar: 4.0.3
       npm-run-path: 6.0.0
       picocolors: 1.1.1
@@ -8613,7 +8694,7 @@ packages:
       vscode-uri: 3.1.0
     dev: false
 
-  /vite-plugin-inspect@0.8.9(@nuxt/kit@4.3.0)(vite@6.4.1):
+  /vite-plugin-inspect@0.8.9(vite@6.4.1):
     resolution: {integrity: sha512-22/8qn+LYonzibb1VeFZmISdVao5kC22jmEKm24vfFE8siEn47EpVcCLYMv6iKOYMJfjSvSJfueOwcFCkUnV3A==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -8624,7 +8705,6 @@ packages:
         optional: true
     dependencies:
       '@antfu/utils': 0.7.10
-      '@nuxt/kit': 4.3.0(magicast@0.5.1)
       '@rollup/pluginutils': 5.3.0(rollup@4.57.1)
       debug: 4.4.3
       error-stack-parser-es: 0.1.5
@@ -8664,7 +8744,7 @@ packages:
       - supports-color
     dev: false
 
-  /vite-plugin-vue-devtools@7.7.9(@nuxt/kit@4.3.0)(vite@6.4.1)(vue@3.5.27):
+  /vite-plugin-vue-devtools@7.7.9(vite@6.4.1)(vue@3.5.27):
     resolution: {integrity: sha512-08DvePf663SxqLFJeMVNW537zzVyakp9KIrI2K7lwgaTqA5R/ydN/N2K8dgZO34tg/Qmw0ch84fOKoBtCEdcGg==}
     engines: {node: '>=v14.21.3'}
     peerDependencies:
@@ -8676,10 +8756,9 @@ packages:
       execa: 9.6.1
       sirv: 3.0.2
       vite: 6.4.1(terser@5.46.0)
-      vite-plugin-inspect: 0.8.9(@nuxt/kit@4.3.0)(vite@6.4.1)
+      vite-plugin-inspect: 0.8.9(vite@6.4.1)
       vite-plugin-vue-inspector: 5.3.2(vite@6.4.1)
     transitivePeerDependencies:
-      - '@nuxt/kit'
       - rollup
       - supports-color
       - vue

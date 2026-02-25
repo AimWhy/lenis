@@ -25,7 +25,7 @@ import { VirtualScroll } from './virtual-scroll'
 
 type OptionalPick<T, F extends keyof T> = Omit<T, F> & Partial<Pick<T, F>>
 
-const defaultEasing = (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+const defaultEasing = (t: number) => Math.min(1, 1.001 - 2 ** (-10 * t))
 
 export class Lenis {
   private _isScrolling: Scrolling = false // true when scroll is animating
@@ -388,7 +388,7 @@ export class Lenis {
 
     // keep zoom feature
     if (event.ctrlKey) return
-    // @ts-ignore
+    // @ts-expect-error
     if (event.lenisStopPropagation) return
 
     const isTouch = event.type.includes('touch')
@@ -442,7 +442,7 @@ export class Lenis {
     const prevent = this.options.prevent
 
     if (
-      !!composedPath.find(
+      composedPath.find(
         (node) =>
           node instanceof HTMLElement &&
           ((typeof prevent === 'function' && prevent?.(node)) ||
@@ -469,7 +469,7 @@ export class Lenis {
     if (!isSmooth) {
       this.isScrolling = 'native'
       this.animate.stop()
-      // @ts-ignore
+      // @ts-expect-error
       event.lenisStopPropagation = true
       return
     }
@@ -490,7 +490,7 @@ export class Lenis {
           (this.animatedScroll === 0 && deltaY > 0) ||
           (this.animatedScroll === this.limit && deltaY < 0)))
     ) {
-      // @ts-ignore
+      // @ts-expect-error
       event.lenisStopPropagation = true
       // event.stopPropagation()
     }
@@ -508,7 +508,7 @@ export class Lenis {
       // delta = this.velocity * this.options.touchInertiaMultiplier
       delta =
         Math.sign(this.velocity) *
-        Math.pow(Math.abs(this.velocity), this.options.touchInertiaExponent)
+        Math.abs(this.velocity) ** this.options.touchInertiaExponent
     }
 
     this.scrollTo(this.targetScroll + delta, {
@@ -839,7 +839,7 @@ export class Lenis {
   ) {
     const time = Date.now()
 
-    // @ts-ignore
+    // @ts-expect-error
     const cache = (node._lenis ??= {})
 
     let hasOverflowX,
@@ -867,7 +867,7 @@ export class Lenis {
       cache.hasOverflowX = hasOverflowX
       cache.hasOverflowY = hasOverflowY
 
-      if (!hasOverflowX && !hasOverflowY) return false // if no overflow, it's not scrollable no matter what, early return saves some computations
+      if (!(hasOverflowX || hasOverflowY)) return false // if no overflow, it's not scrollable no matter what, early return saves some computations
       if (gestureOrientation === 'vertical' && !hasOverflowY) return false
       if (gestureOrientation === 'horizontal' && !hasOverflowX) return false
 
@@ -897,20 +897,14 @@ export class Lenis {
       clientHeight = cache.clientHeight
     }
 
-    if (
-      (!hasOverflowX && !hasOverflowY) ||
-      (!isScrollableX && !isScrollableY)
-    ) {
+    if (!(hasOverflowX || hasOverflowY) || !(isScrollableX || isScrollableY)) {
       return false
     }
 
-    if (gestureOrientation === 'vertical' && (!hasOverflowY || !isScrollableY))
+    if (gestureOrientation === 'vertical' && !(hasOverflowY && isScrollableY))
       return false
 
-    if (
-      gestureOrientation === 'horizontal' &&
-      (!hasOverflowX || !isScrollableX)
-    )
+    if (gestureOrientation === 'horizontal' && !(hasOverflowX && isScrollableX))
       return false
 
     let orientation: 'x' | 'y' | undefined
@@ -977,12 +971,10 @@ export class Lenis {
     if (this.options.naiveDimensions) {
       if (this.isHorizontal) {
         return this.rootElement.scrollWidth - this.rootElement.clientWidth
-      } else {
-        return this.rootElement.scrollHeight - this.rootElement.clientHeight
       }
-    } else {
-      return this.dimensions.limit[this.isHorizontal ? 'x' : 'y']
+      return this.rootElement.scrollHeight - this.rootElement.clientHeight
     }
+    return this.dimensions.limit[this.isHorizontal ? 'x' : 'y']
   }
 
   /**
