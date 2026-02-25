@@ -110,10 +110,9 @@ export const ReactLenis = forwardRef<LenisRef, LenisProps>(
       if (!lenis) return
 
       const onScroll: ScrollCallback = (data) => {
-        // for (const { callback } of callbacksRefs.current) {
-        //   callback(data)
-        // }
-        console.log('data', data)
+        for (const { callback } of callbacksRefs.current) {
+          callback(data)
+        }
       }
 
       lenis.on('scroll', onScroll)
